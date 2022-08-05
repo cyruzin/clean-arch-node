@@ -4,7 +4,7 @@ import { productRepository } from 'repositories/products';
 async function getAll(): Promise<Product[]> {
   try {
     return await productRepository.getAll();
-  } catch (err: any) {
+  } catch (err) {
     throw err;
   }
 }
@@ -12,7 +12,7 @@ async function getAll(): Promise<Product[]> {
 async function getByID(id: number): Promise<Product> {
   try {
     return await productRepository.getByID(id);
-  } catch (err: any) {
+  } catch (err) {
     throw err;
   }
 }
