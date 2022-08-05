@@ -1,0 +1,22 @@
+{
+  "name": "clean-arch-node",
+  "version": "1.0.0",
+  "description": "Clean architecture example in Node.js.",
+  "main": "./src/app.ts",
+  "author": "Cyro Dubeux",
+  "license": "MIT",
+  "private": false,
+  "dependencies": {
+    "fastify": "^4.3.0",
+    "nodemon": "^2.0.19"
+  },
+  "devDependencies": {
+    "@types/node": "^18.6.4",
+    "ts-node": "^10.9.1",
+    "typescript": "^4.7.4"
+  },
+  "scripts": {
+    "start": "nodemon",
+    "build": "tsc -p tsconfig.json"
+  }
+}
