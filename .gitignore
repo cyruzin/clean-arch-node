@@ -24,3 +24,10 @@ yarn-error.log*
 
 # env
 .env
+
+# ide
+\.idea/
+\.vscode/
+
+# docker files
+db/postgres/.data

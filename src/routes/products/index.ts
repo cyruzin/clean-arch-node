@@ -1,5 +1,5 @@
 import { FastifyInstance, FastifyPluginOptions } from 'fastify';
-import { getAll } from '../../http/controllers/products';
+import { getAll, getByID } from '../../http/controllers/products';
 
 export default function (
   fastify: FastifyInstance,
@@ -7,5 +7,6 @@ export default function (
   done: () => void,
 ) {
   fastify.get('/products', {}, getAll);
+  fastify.get('/products/:id', {}, getByID);
   done();
 }

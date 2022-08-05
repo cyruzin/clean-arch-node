@@ -1,5 +1,8 @@
 import Fastify, { FastifyInstance } from 'fastify';
 import ProductsRoutes from './routes/products';
+import { postgres } from './config/database';
+
+postgres.connect();
 
 const fastify: FastifyInstance = Fastify({ logger: true });
 
