@@ -12,7 +12,7 @@ fastify.register(ProductsRoutes);
 const start = async () => {
   try {
     await fastify.listen({ port: 3000 });
-    console.log('server started successfully');
+    fastify.log.info('server started successfully');
   } catch (err) {
     fastify.log.error(err);
     process.exit(1);
