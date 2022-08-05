@@ -1,20 +1,10 @@
-import Fastify, { FastifyInstance, RouteShorthandOptions } from 'fastify';
+import Fastify, { FastifyInstance } from 'fastify';
 import ProductsRoutes from './routes/products';
 
 const fastify: FastifyInstance = Fastify({ logger: true });
 
-const opts: RouteShorthandOptions = {
-  schema: {
-    response: {
-      200: {
-        type: 'string',
-      },
-    },
-  },
-};
-
-fastify.get('/', opts, async (request, reply) => {
-  reply.send({ v1: 'clean architecture' });
+fastify.get('/', {}, async (request, reply) => {
+  reply.code(200).send({ v1: 'clean architecture' });
 });
 
 fastify.register(ProductsRoutes);
