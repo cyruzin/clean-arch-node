@@ -11,7 +11,7 @@ export interface ProductRepository {
   getByID: (id: number) => Promise<Product>;
   create: (product: Product) => Promise<void>;
   update: (product: Product) => Promise<void>;
-  remove: (id: string) => Promise<void>;
+  remove: (id: number) => Promise<void>;
 }
 
 export interface ProductService {
@@ -19,5 +19,5 @@ export interface ProductService {
   getByID: (id: number) => Promise<Product>;
   create: (product: Product) => Promise<void>;
   update: (product: Product) => Promise<void>;
-  remove: (id: string) => Promise<void>;
+  remove: (id: number) => Promise<void>;
 }

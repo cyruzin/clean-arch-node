@@ -1,5 +1,5 @@
-import { Product, ProductService } from 'domain/products';
-import { productRepository } from 'repositories/products';
+import { Product, ProductService } from '../domain/products';
+import { productRepository } from '../repositories/products';
 
 async function getAll(): Promise<Product[]> {
   try {
@@ -17,11 +17,37 @@ async function getByID(id: number): Promise<Product> {
   }
 }
 
-async function create(product: Product): Promise<void> {}
+async function create(product: Product): Promise<void> {
+  try {
+    await productRepository.create(product);
+  } catch (err) {
+    throw err;
+  }
+}
 
-async function update(product: Product): Promise<void> {}
+async function update(product: Product): Promise<void> {
+  try {
+    const productExists = await productRepository.getByID(Number(product?.id));
 
-async function remove(id: string): Promise<void> {}
+    if (!productExists?.id) throw new Error('invalid id');
+
+    await productRepository.update(product);
+  } catch (err) {
+    throw err;
+  }
+}
+
+async function remove(id: number): Promise<void> {
+  try {
+    const product = await productRepository.getByID(id);
+
+    if (!product?.id) throw new Error('invalid id');
+
+    await productRepository.remove(id);
+  } catch (err) {
+    throw err;
+  }
+}
 
 export const productService: ProductService = {
   getAll,
