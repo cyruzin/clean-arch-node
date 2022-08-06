@@ -27,10 +27,7 @@ async function create(product: Product): Promise<void> {
 
 async function update(product: Product): Promise<void> {
   try {
-    const productExists = await productRepository.getByID(Number(product?.id));
-
-    if (!productExists?.id) throw new Error('invalid id');
-
+    await productRepository.getByID(Number(product?.id));
     await productRepository.update(product);
   } catch (err) {
     throw err;
@@ -39,10 +36,7 @@ async function update(product: Product): Promise<void> {
 
 async function remove(id: number): Promise<void> {
   try {
-    const product = await productRepository.getByID(id);
-
-    if (!product?.id) throw new Error('invalid id');
-
+    await productRepository.getByID(id);
     await productRepository.remove(id);
   } catch (err) {
     throw err;

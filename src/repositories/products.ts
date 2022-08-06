@@ -18,6 +18,9 @@ async function getByID(id: number): Promise<Product> {
       'SELECT id, name, type, created_at, updated_at FROM products WHERE id = $1',
       [id],
     );
+
+    if (!result.rows[0]) throw new Error('invalid id');
+
     return result.rows[0] as Product;
   } catch (err) {
     throw err;
@@ -26,12 +29,10 @@ async function getByID(id: number): Promise<Product> {
 
 async function create(product: Product): Promise<void> {
   try {
-    const now = new Date();
-
     postgres.query(
-      `INSERT INTO products (name, type, created_at, updated_at) 
-       VALUES($1, $2, $3, $4)`,
-      [product.name, product.type, now, now],
+      `INSERT INTO products (name, type) 
+       VALUES($1, $2)`,
+      [product.name, product.type],
     );
   } catch (err) {
     throw err;
