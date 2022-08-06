@@ -1,11 +1,17 @@
 import Fastify, { FastifyInstance } from 'fastify';
-import Routes from './routes';
+import cors from '@fastify/cors';
 import { postgres } from './config/database';
+import Routes from './routes';
 
 const fastify: FastifyInstance = Fastify({ logger: true });
 
-fastify.get('/', {}, async (request, reply) => {
-  reply.code(200).send({ v1: 'clean architecture' });
+fastify.register(cors, {
+  origin: ['https://*', 'http://*'],
+  allowedHeaders: ['Accept', 'Authorization', 'Content-Type'],
+  exposedHeaders: ['Link'],
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  credentials: true,
+  maxAge: 300,
 });
 
 fastify.register(Routes);

@@ -9,5 +9,4 @@ TODO:
 - Implement .env config
 - Implement errors enum
 - Implemente tests
-- Improve interfaces names
 - Improve README

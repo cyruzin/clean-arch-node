@@ -1,34 +1,34 @@
-import { Product, ProductService } from '../domain/products';
-import { productRepository } from '../repositories/products';
+import { IProduct, IProductService } from '../domain/products';
+import { ProductRepository } from '../repositories/products';
 
-async function getAll(): Promise<Product[]> {
+async function getAll(): Promise<IProduct[]> {
   try {
-    return await productRepository.getAll();
+    return await ProductRepository.getAll();
   } catch (err) {
     throw err;
   }
 }
 
-async function getByID(id: number): Promise<Product> {
+async function getByID(id: number): Promise<IProduct> {
   try {
-    return await productRepository.getByID(id);
+    return await ProductRepository.getByID(id);
   } catch (err) {
     throw err;
   }
 }
 
-async function create(product: Product): Promise<void> {
+async function create(product: IProduct): Promise<void> {
   try {
-    await productRepository.create(product);
+    await ProductRepository.create(product);
   } catch (err) {
     throw err;
   }
 }
 
-async function update(product: Product): Promise<void> {
+async function update(product: IProduct): Promise<void> {
   try {
-    await productRepository.getByID(Number(product?.id));
-    await productRepository.update(product);
+    await ProductRepository.getByID(Number(product?.id));
+    await ProductRepository.update(product);
   } catch (err) {
     throw err;
   }
@@ -36,14 +36,14 @@ async function update(product: Product): Promise<void> {
 
 async function remove(id: number): Promise<void> {
   try {
-    await productRepository.getByID(id);
-    await productRepository.remove(id);
+    await ProductRepository.getByID(id);
+    await ProductRepository.remove(id);
   } catch (err) {
     throw err;
   }
 }
 
-export const productService: ProductService = {
+export const ProductService: IProductService = {
   getAll,
   getByID,
   create,

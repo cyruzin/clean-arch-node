@@ -1,10 +1,10 @@
-import { Product } from 'domain/products';
+import { IProduct } from 'domain/products';
 import { FastifyRequest, FastifyReply } from 'fastify';
-import { productService } from '../../services/products';
+import { ProductService } from '../../services/products';
 
-export const getAll = async (request: FastifyRequest, reply: FastifyReply) => {
+export const getAll = async (_request: FastifyRequest, reply: FastifyReply) => {
   try {
-    const res = await productService.getAll();
+    const res = await ProductService.getAll();
     return reply.code(200).send(res);
   } catch (err) {
     return reply.code(500).send(err);
@@ -16,7 +16,7 @@ export const getByID = async (request: FastifyRequest, reply: FastifyReply) => {
     const { id } = request.params as any;
     if (!id) throw new Error('id required');
 
-    const res = await productService.getByID(+id);
+    const res = await ProductService.getByID(+id);
     return reply.code(200).send(res);
   } catch (err) {
     return reply.code(500).send(err);
@@ -25,7 +25,7 @@ export const getByID = async (request: FastifyRequest, reply: FastifyReply) => {
 
 export const create = async (request: FastifyRequest, reply: FastifyReply) => {
   try {
-    await productService.create(request.body as Product);
+    await ProductService.create(request.body as IProduct);
     return reply.code(201).send({ message: 'created' });
   } catch (err) {
     return reply.code(500).send(err);
@@ -37,12 +37,12 @@ export const update = async (request: FastifyRequest, reply: FastifyReply) => {
     const { id } = request.params as any;
     if (!id) throw new Error('id required');
 
-    const newProduct: Product = {
-      ...(request.body as Product),
+    const newProduct: IProduct = {
+      ...(request.body as IProduct),
       id,
     };
 
-    await productService.update(newProduct);
+    await ProductService.update(newProduct);
     return reply.code(200).send({ message: 'updated' });
   } catch (err) {
     return reply.code(500).send(err);
@@ -54,7 +54,7 @@ export const remove = async (request: FastifyRequest, reply: FastifyReply) => {
     const { id } = request.params as any;
     if (!id) throw new Error('id required');
 
-    await productService.remove(+id);
+    await ProductService.remove(+id);
     return reply.code(200).send({ message: 'removed' });
   } catch (err) {
     return reply.code(500).send(err);

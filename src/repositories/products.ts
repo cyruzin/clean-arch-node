@@ -1,7 +1,7 @@
-import { Product, ProductRepository } from 'domain/products';
+import { IProduct, IProductRepository } from 'domain/products';
 import { postgres } from '../config/database';
 
-async function getAll(): Promise<Product[]> {
+async function getAll(): Promise<IProduct[]> {
   try {
     const result = await postgres.query(
       'SELECT id, name, type, created_at, updated_at FROM products',
@@ -12,7 +12,7 @@ async function getAll(): Promise<Product[]> {
   }
 }
 
-async function getByID(id: number): Promise<Product> {
+async function getByID(id: number): Promise<IProduct> {
   try {
     const result = await postgres.query(
       'SELECT id, name, type, created_at, updated_at FROM products WHERE id = $1',
@@ -21,13 +21,13 @@ async function getByID(id: number): Promise<Product> {
 
     if (!result.rows[0]) throw new Error('invalid id');
 
-    return result.rows[0] as Product;
+    return result.rows[0] as IProduct;
   } catch (err) {
     throw err;
   }
 }
 
-async function create(product: Product): Promise<void> {
+async function create(product: IProduct): Promise<void> {
   try {
     postgres.query(
       `INSERT INTO products (name, type) 
@@ -39,7 +39,7 @@ async function create(product: Product): Promise<void> {
   }
 }
 
-async function update(product: Product): Promise<void> {
+async function update(product: IProduct): Promise<void> {
   try {
     const now = new Date();
 
@@ -66,7 +66,7 @@ async function remove(id: number): Promise<void> {
   }
 }
 
-export const productRepository: ProductRepository = {
+export const ProductRepository: IProductRepository = {
   getAll,
   getByID,
   create,
