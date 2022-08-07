@@ -24,6 +24,10 @@ Then:
  yarn start
 ```
 
+## Documentation
+
+Go to the **docs** folder and import the Insomnia data.
+
 ## Tests
 
 ```sh
