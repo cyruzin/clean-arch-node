@@ -1,5 +1,5 @@
 import { IProduct, IProductRepository } from '../domain/products';
-import ResourceNotFound from '../domain/errors/resource';
+import ResourceNotFoundError from '../domain/errors/resource';
 import { postgres } from '../config/database';
 
 async function getAll(): Promise<IProduct[]> {
@@ -20,7 +20,7 @@ async function getByID(id: number): Promise<IProduct> {
       [id],
     );
 
-    if (!result.rows[0]) throw new ResourceNotFound('ID not found');
+    if (!result.rows[0]) throw new ResourceNotFoundError('ID not found');
 
     return result.rows[0] as IProduct;
   } catch (err) {

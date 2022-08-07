@@ -1,4 +1,4 @@
-export default class ResourceNotFoundError extends Error {
+export default class ValidationError extends Error {
   status: number;
 
   constructor(message?: string) {
@@ -6,6 +6,6 @@ export default class ResourceNotFoundError extends Error {
     Error.captureStackTrace(this, this.constructor);
 
     this.name = this.constructor.name;
-    this.status = 404;
+    this.status = 400;
   }
 }
