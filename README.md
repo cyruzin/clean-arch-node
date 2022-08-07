@@ -4,9 +4,5 @@ In development.
 
 TODO:
 
-- Implement route schema
-- Implement validation
-- Implement .env config
-- Implement errors enum
 - Implemente tests
 - Improve README

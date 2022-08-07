@@ -3,7 +3,7 @@ import { getAll, getByID, create, update, remove } from '../http/controllers/pro
 
 export default function (
   fastify: FastifyInstance,
-  options: FastifyPluginOptions,
+  _options: FastifyPluginOptions,
   done: () => void,
 ) {
   fastify.get('/products', {}, getAll);
