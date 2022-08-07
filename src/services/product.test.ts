@@ -44,3 +44,37 @@ describe('getAll failure', () => {
     }
   });
 });
+
+describe('getByID success', () => {
+  test('should return a product by id', async () => {
+    const mockProduct: IProduct = {
+      id: 1,
+      name: 'PlayStation 5',
+      type: 'Electronics',
+      created_at: new Date(),
+      updated_at: new Date(),
+    };
+
+    ProductRepository.getByID = jest.fn(() => Promise.resolve(mockProduct));
+
+    const res = await ProductService.getByID(1);
+
+    expect(res.name).toBe('PlayStation 5');
+
+    expect(ProductRepository.getByID).toBeCalledTimes(1);
+  });
+});
+
+describe('getByID failure', () => {
+  test('should fail to return a product by id', async () => {
+    ProductRepository.getByID = jest.fn(() => {
+      throw new Error('failed to retrieve the product');
+    });
+
+    try {
+      await ProductService.getAll();
+    } catch (err: any) {
+      expect(err.message).toEqual('failed to retrieve the product');
+    }
+  });
+});
