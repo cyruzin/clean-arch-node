@@ -6,10 +6,10 @@ import Routes from './routes';
 const fastify: FastifyInstance = Fastify({ logger: true });
 
 fastify.register(cors, {
-  origin: ['https://*', 'http://*'],
+  origin: ['*'],
   allowedHeaders: ['Accept', 'Authorization', 'Content-Type'],
   exposedHeaders: ['Link'],
-  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   credentials: true,
   maxAge: 300,
 });
