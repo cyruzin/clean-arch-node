@@ -1,8 +1,8 @@
-import { IProduct } from 'domain/products';
 import { FastifyRequest, FastifyReply } from 'fastify';
-import { productSchema } from '../../validation/products';
+import { IProduct } from '../../domain/products';
 import { ProductService } from '../../services/products';
-import ValidationError from '../../domain/errors/validation';
+import { productSchema } from '../../validation/products';
+import ValidationError from '../../errors/validation';
 import { EHTTP } from '../../enums/http-status-code';
 
 export const getAll = async (_request: FastifyRequest, reply: FastifyReply) => {

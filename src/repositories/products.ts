@@ -1,5 +1,5 @@
 import { IProduct, IProductRepository } from '../domain/products';
-import ResourceNotFoundError from '../domain/errors/resource-not-found';
+import ResourceNotFoundError from '../errors/resource-not-found';
 import { postgres } from '../config/database';
 
 async function getAll(): Promise<IProduct[]> {

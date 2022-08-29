@@ -1,9 +1,15 @@
+import * as dotenv from 'dotenv';
+
+dotenv.config({ path: __dirname + '../../.env' });
+
 import Fastify, { FastifyInstance } from 'fastify';
 import cors from '@fastify/cors';
 import { postgres } from './config/database';
 import Routes from './routes';
 
 const fastify: FastifyInstance = Fastify({ logger: true });
+
+fastify.server.requestTimeout = 20000;
 
 fastify.register(cors, {
   origin: ['*'],
@@ -21,7 +27,7 @@ fastify.register(Routes);
     await postgres.connect();
     fastify.log.info('postgres started successfully');
 
-    await fastify.listen({ port: 3000 });
+    await fastify.listen({ port: Number(process.env.PORT) });
     fastify.log.info('server started successfully');
   } catch (err) {
     fastify.log.error(err);

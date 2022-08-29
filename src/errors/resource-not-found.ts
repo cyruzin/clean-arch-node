@@ -1,4 +1,6 @@
-export default class ValidationError extends Error {
+import { EHTTP } from "../enums/http-status-code";
+
+export default class ResourceNotFoundError extends Error {
   status: number;
 
   constructor(message?: string) {
@@ -6,6 +8,6 @@ export default class ValidationError extends Error {
     Error.captureStackTrace(this, this.constructor);
 
     this.name = this.constructor.name;
-    this.status = 400;
+    this.status = EHTTP.StatusNotFound;
   }
 }
