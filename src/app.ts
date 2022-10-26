@@ -6,7 +6,6 @@ import Fastify, { FastifyInstance } from 'fastify';
 import cors from '@fastify/cors';
 import { postgres } from './config/database';
 import Routes from './routes';
-import FastifyGracefulShutdown from 'fastify-graceful-shutdown';
 
 const fastify: FastifyInstance = Fastify({ logger: true });
 
@@ -22,27 +21,6 @@ fastify.register(cors, {
 });
 
 fastify.register(Routes);
-
-fastify.register(FastifyGracefulShutdown);
-
-fastify.addHook('onClose', async () => {
-  await postgres.end();
-  fastify.log.info('postgres closed');
-  fastify.log.info('server closed');
-});
-
-fastify.after(() => {
-  fastify.gracefulShutdown(async (signal: string, next: (err?: Error | undefined) => void) => {
-    try {
-      fastify.log.warn(signal + ' received...');
-      fastify.log.info('closing postgres...');
-      next();
-    } catch (err: any) {
-      fastify.log.error(err);
-      next(err);
-    }
-  });
-});
 
 (async () => {
   try {
